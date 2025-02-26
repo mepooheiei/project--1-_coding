@@ -1,0 +1,119 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "toc_visible": true,
+      "authorship_tag": "ABX9TyP86nBihZyR06ClFkQAj4Bz",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/mepooheiei/project--1-_coding/blob/main/gui\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import tkinter as tk\n",
+        "from tkinter import messagebox\n",
+        "import math\n",
+        "\n",
+        "# ฟังก์ชันสำหรับคำนวณระยะห่าง\n",
+        "def calculate_distance():\n",
+        "    try:\n",
+        "        # ตรวจสอบประเภท 2D หรือ 3D\n",
+        "        dimension = dimension_var.get()\n",
+        "\n",
+        "        # ดึงค่าจากช่องป้อนข้อมูล\n",
+        "        x1 = float(entry_x1.get())\n",
+        "        y1 = float(entry_y1.get())\n",
+        "        x2 = float(entry_x2.get())\n",
+        "        y2 = float(entry_y2.get())\n",
+        "\n",
+        "        if dimension == \"2D\":\n",
+        "            # คำนวณระยะห่างใน 2D\n",
+        "            distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)\n",
+        "        else:\n",
+        "            # รับค่า z เพิ่มเติม\n",
+        "            z1 = float(entry_z1.get())\n",
+        "            z2 = float(entry_z2.get())\n",
+        "            # คำนวณระยะห่างใน 3D\n",
+        "            distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2)\n",
+        "\n",
+        "        # แสดงผลลัพธ์\n",
+        "        result_label.config(text=f\"ระยะห่างระหว่างจุด A และ B: {distance:.2f} หน่วย\")\n",
+        "\n",
+        "    except ValueError:\n",
+        "        messagebox.showerror(\"ข้อผิดพลาด\", \"กรุณาป้อนค่าตัวเลขให้ถูกต้อง!\")\n",
+        "\n",
+        "# ฟังก์ชันสำหรับเปลี่ยนอินเทอร์เฟซระหว่าง 2D และ 3D\n",
+        "def update_dimension():\n",
+        "    if dimension_var.get() == \"3D\":\n",
+        "        entry_z1.config(state=\"normal\")\n",
+        "        entry_z2.config(state=\"normal\")\n",
+        "    else:\n",
+        "        entry_z1.config(state=\"disabled\")\n",
+        "        entry_z2.config(state=\"disabled\")\n",
+        "\n",
+        "# สร้างหน้าต่างหลัก\n",
+        "root = tk.Tk()\n",
+        "root.title(\"คำนวณระยะห่างระหว่างสองจุด\")\n",
+        "root.geometry(\"400x400\")\n",
+        "\n",
+        "# ตัวเลือก 2D หรือ 3D\n",
+        "dimension_var = tk.StringVar(value=\"2D\")\n",
+        "tk.Label(root, text=\"เลือกมิติการคำนวณ:\").pack()\n",
+        "tk.Radiobutton(root, text=\"2D\", variable=dimension_var, value=\"2D\", command=update_dimension).pack()\n",
+        "tk.Radiobutton(root, text=\"3D\", variable=dimension_var, value=\"3D\", command=update_dimension).pack()\n",
+        "\n",
+        "# ช่องป้อนค่าพิกัดของจุด A และ B\n",
+        "tk.Label(root, text=\"ป้อนค่าพิกัดของจุด A\").pack()\n",
+        "entry_x1 = tk.Entry(root)\n",
+        "entry_y1 = tk.Entry(root)\n",
+        "entry_z1 = tk.Entry(root, state=\"disabled\")  # ปิดใช้งาน z สำหรับ 2D\n",
+        "entry_x1.pack()\n",
+        "entry_y1.pack()\n",
+        "entry_z1.pack()\n",
+        "\n",
+        "tk.Label(root, text=\"ป้อนค่าพิกัดของจุด B\").pack()\n",
+        "entry_x2 = tk.Entry(root)\n",
+        "entry_y2 = tk.Entry(root)\n",
+        "entry_z2 = tk.Entry(root, state=\"disabled\")  # ปิดใช้งาน z สำหรับ 2D\n",
+        "entry_x2.pack()\n",
+        "entry_y2.pack()\n",
+        "entry_z2.pack()\n",
+        "\n",
+        "# ปุ่มคำนวณ\n",
+        "tk.Button(root, text=\"คำนวณระยะห่าง\", command=calculate_distance).pack()\n",
+        "\n",
+        "# ป้ายแสดงผลลัพธ์\n",
+        "result_label = tk.Label(root, text=\"ระยะห่าง: -\", font=(\"Arial\", 12))\n",
+        "result_label.pack()\n",
+        "\n",
+        "# เรียกใช้หน้าต่างหลัก\n",
+        "root.mainloop()\n"
+      ],
+      "metadata": {
+        "id": "PaZqNSdMcR_W"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}

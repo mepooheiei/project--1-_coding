@@ -1,0 +1,70 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNhPShxjzOLSWOiGEEdMj+f",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/mepooheiei/project--1-_coding/blob/main/text\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "QGb-c3zlRmCA"
+      },
+      "outputs": [],
+      "source": [
+        "mport math\n",
+        "\n",
+        "# รับค่าประเภทของการคำนวณ (2D หรือ 3D)\n",
+        "dimension = input(\"คุณต้องการคำนวณระยะห่างใน 2D หรือ 3D? (พิมพ์ 2 หรือ 3): \")\n",
+        "\n",
+        "# ตรวจสอบว่าเป็น 2D หรือ 3D\n",
+        "if dimension == \"2\":\n",
+        "    # รับค่าพิกัดของจุด A และ B\n",
+        "    x1, y1 = map(float, input(\"ป้อนค่าพิกัดของจุด A (x1, y1): \").split())\n",
+        "    x2, y2 = map(float, input(\"ป้อนค่าพิกัดของจุด B (x2, y2): \").split())\n",
+        "\n",
+        "    # คำนวณระยะห่าง\n",
+        "    distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)\n",
+        "\n",
+        "    # แสดงผลลัพธ์\n",
+        "    print(f\"ระยะห่างระหว่างจุด A และ B ใน 2D คือ: {distance:.2f}\")\n",
+        "\n",
+        "elif dimension == \"3\":\n",
+        "    # รับค่าพิกัดของจุด A และ B\n",
+        "    x1, y1, z1 = map(float, input(\"ป้อนค่าพิกัดของจุด A (x1, y1, z1): \").split())\n",
+        "    x2, y2, z2 = map(float, input(\"ป้อนค่าพิกัดของจุด B (x2, y2, z2): \").split())\n",
+        "\n",
+        "    # คำนวณระยะห่าง\n",
+        "    distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2)\n",
+        "\n",
+        "    # แสดงผลลัพธ์\n",
+        "    print(f\"ระยะห่างระหว่างจุด A และ B ใน 3D คือ: {distance:.2f}\")\n",
+        "\n",
+        "else:\n",
+        "    print(\"ข้อผิดพลาด: กรุณาป้อน 2 หรือ 3 เท่านั้น!\")\n"
+      ]
+    }
+  ]
+}
